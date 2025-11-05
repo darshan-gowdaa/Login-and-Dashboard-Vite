@@ -11,11 +11,11 @@ export const Login = ({ setIsAuthenticated }) => {
   const passwordRef = React.useRef();
 
   const handleKeyDown = (e, field) => {
-    if (e.key === 'Enter') {
+    if (e.key === "Enter") {
       e.preventDefault();
-      if (field === 'email') {
+      if (field === "email") {
         passwordRef.current.focus();
-      } else if (field === 'password') {
+      } else if (field === "password") {
         handleLogin(e);
       }
     }
@@ -61,7 +61,7 @@ export const Login = ({ setIsAuthenticated }) => {
             placeholder="Username"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
-            onKeyDown={(e) => handleKeyDown(e, 'email')}
+            onKeyDown={(e) => handleKeyDown(e, "email")}
             autoFocus
             className="w-full p-3 text-lg text-white border border-gray-600 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 transition-all duration-300 md:text-base sm:text-sm"
           />
@@ -73,7 +73,7 @@ export const Login = ({ setIsAuthenticated }) => {
             placeholder="Password"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
-            onKeyDown={(e) => handleKeyDown(e, 'password')}
+            onKeyDown={(e) => handleKeyDown(e, "password")}
             ref={passwordRef}
             className="w-full p-3 text-lg text-white border border-gray-600 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 transition-all duration-300 md:text-base sm:text-sm"
           />
@@ -81,9 +81,9 @@ export const Login = ({ setIsAuthenticated }) => {
 
         <div className="flex flex-col gap-2 md:flex-row md:items-center md:justify-between text-white">
           <label className="flex items-center">
-            <input 
-              type="checkbox" 
-              className="mr-2" 
+            <input
+              type="checkbox"
+              className="mr-2"
               checked={rememberMe}
               onChange={(e) => setRememberMe(e.target.checked)}
             />
