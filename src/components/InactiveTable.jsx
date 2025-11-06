@@ -1,6 +1,8 @@
 import React, { useState } from "react";
+import { IoNotificationsOutline, IoNotifications } from "react-icons/io5";
 
 const InactiveTable = () => {
+  const [activeReminders, setActiveReminders] = useState(new Set());
   const dataSets = {
     Monthly: [
       { company: "O Circle", users: 22, package: "Basic" },
@@ -43,7 +45,7 @@ const InactiveTable = () => {
 
   return (
     <div className="p-2 md:p-4 bg-gray-800 rounded-lg shadow-lg animate-fade-in">
-      <div className="flex flex-col sm:flex-row items-center justify-between mb-6 gap-2">
+      <div className="flex items-center justify-between mb-6 gap-2">
         <h2 className="text-xl font-semibold text-white">
           Inactive Companies/Users
         </h2>
@@ -66,7 +68,7 @@ const InactiveTable = () => {
               <th className="p-3 border border-gray-600">Company</th>
               <th className="p-3 border border-gray-600">No. of Users</th>
               <th className="p-3 border border-gray-600">Package</th>
-              <th className="p-3 border border-gray-600">Send Reminder</th>
+              <th className="p-3 border border-gray-600">Actions</th>
             </tr>
           </thead>
           <tbody>
@@ -86,9 +88,36 @@ const InactiveTable = () => {
                     {item.package}
                   </span>
                 </td>
-                <td className="p-3 border border-gray-600">
-                  <button className="font-semibold text-red-400 hover:text-red-600 transition-all duration-200">
-                    Send Reminder
+                <td className="p-3 border border-gray-600 text-center">
+                  <button
+                    className="p-1 transition-all duration-200 rounded-full hover:bg-gray-600/30 mx-auto inline-flex items-center justify-center"
+                    onClick={() => {
+                      const newActiveReminders = new Set(activeReminders);
+                      if (newActiveReminders.has(item.company)) {
+                        newActiveReminders.delete(item.company);
+                      } else {
+                        newActiveReminders.add(item.company);
+                        // Restart animation
+                        const bell = document.getElementById(
+                          `bell-${item.company}`
+                        );
+                        if (bell) {
+                          bell.style.animation = "none";
+                          bell.offsetHeight; // Trigger reflow
+                          bell.style.animation = "bellRing 1s ease-in-out";
+                        }
+                      }
+                      setActiveReminders(newActiveReminders);
+                    }}
+                  >
+                    {activeReminders.has(item.company) ? (
+                      <IoNotifications
+                        className="w-5 h-5 text-yellow-400 animate-bell-ring"
+                        id={`bell-${item.company}`}
+                      />
+                    ) : (
+                      <IoNotificationsOutline className="w-5 h-5 text-white" />
+                    )}
                   </button>
                 </td>
               </tr>

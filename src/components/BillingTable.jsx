@@ -37,7 +37,7 @@ const BillingTable = () => {
 
   return (
     <div className="p-2 md:p-4 bg-gray-800 rounded-lg shadow-lg animate-fade-in">
-      <div className="flex flex-col sm:flex-row items-center justify-between mb-6 gap-2">
+      <div className="flex items-center justify-between mb-6 gap-2">
         <h2 className="text-xl font-semibold text-white">Billing & Invoices</h2>
         <select
           className="p-2 text-white bg-gray-700 rounded-lg"

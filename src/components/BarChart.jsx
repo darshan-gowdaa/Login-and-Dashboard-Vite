@@ -5,6 +5,7 @@ import {
   XAxis,
   YAxis,
   Tooltip,
+  ResponsiveContainer,
 } from "recharts";
 
 const BarChart = () => {
@@ -45,7 +46,7 @@ const BarChart = () => {
   };
 
   return (
-    <div className="p-4 bg-gray-800 rounded-lg">
+    <div className="p-4 bg-gray-800 rounded-lg w-full">
       <div className="flex items-center justify-between mb-4">
         <h2 className="text-lg text-white">Recurring Revenue</h2>
         <select
@@ -59,18 +60,18 @@ const BarChart = () => {
           <option value="Yearly">Yearly</option>
         </select>
       </div>
-      <RechartsBarChart
-        width={500}
-        height={300}
-        data={data}
-        margin={{ top: 5, right: 30, left: 20, bottom: 5 }}
-      >
-        <XAxis dataKey="name" stroke="#fff" />
-        <YAxis stroke="#fff" />
-        <Tooltip />
-        <Bar dataKey="premium" fill="#8884d8" />
-        <Bar dataKey="trial" fill="#82ca9d" />
-      </RechartsBarChart>
+      <ResponsiveContainer width="100%" height={300}>
+        <RechartsBarChart
+          data={data}
+          margin={{ top: 5, right: 30, left: 20, bottom: 5 }}
+        >
+          <XAxis dataKey="name" stroke="#fff" />
+          <YAxis stroke="#fff" />
+          <Tooltip />
+          <Bar dataKey="premium" fill="#8884d8" />
+          <Bar dataKey="trial" fill="#82ca9d" />
+        </RechartsBarChart>
+      </ResponsiveContainer>
     </div>
   );
 };

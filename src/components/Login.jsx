@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate, Link } from "react-router-dom";
 import { notify } from "./Toast";
+import { toast } from "react-toastify";
 import { AuthLayout } from "./AuthContext";
 
 export const Login = ({ setIsAuthenticated }) => {
@@ -22,16 +23,12 @@ export const Login = ({ setIsAuthenticated }) => {
   };
 
   useEffect(() => {
-    // Show info toast for 5 seconds on mount
-    notify.info("Use ' admin '  as username and password to login.", {
-      autoClose: 5000,
-      position: "top-center",
-      hideProgressBar: false,
-      closeOnClick: true,
-      pauseOnHover: true,
-      draggable: false,
+    notify.info("Use 'admin' as username and password to login", {
       toastId: "login-admin-info",
-      dangerouslyAllowHtml: true,
+      className: "glass-toast",
+      bodyClassName: "glass-body",
+      closeButton: false,
+      autoClose: 3000,
     });
   }, []);
 
@@ -41,6 +38,7 @@ export const Login = ({ setIsAuthenticated }) => {
       setIsAuthenticated(true);
       navigate("/dashboard");
     } else {
+      toast.dismiss("login-admin-info");
       notify.error("Invalid credentials! Try again.");
     }
   };
@@ -63,7 +61,7 @@ export const Login = ({ setIsAuthenticated }) => {
             onChange={(e) => setEmail(e.target.value)}
             onKeyDown={(e) => handleKeyDown(e, "email")}
             autoFocus
-            className="w-full p-3 text-lg text-white border border-gray-600 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 transition-all duration-300 md:text-base sm:text-sm"
+            className="w-full p-3 text-lg text-white transition-all duration-300 border border-gray-600 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 md:text-base sm:text-sm"
           />
         </div>
 
@@ -75,11 +73,11 @@ export const Login = ({ setIsAuthenticated }) => {
             onChange={(e) => setPassword(e.target.value)}
             onKeyDown={(e) => handleKeyDown(e, "password")}
             ref={passwordRef}
-            className="w-full p-3 text-lg text-white border border-gray-600 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 transition-all duration-300 md:text-base sm:text-sm"
+            className="w-full p-3 text-lg text-white transition-all duration-300 border border-gray-600 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 md:text-base sm:text-sm"
           />
         </div>
 
-        <div className="flex flex-col gap-2 md:flex-row md:items-center md:justify-between text-white">
+        <div className="flex flex-col gap-2 text-white md:flex-row md:items-center md:justify-between">
           <label className="flex items-center">
             <input
               type="checkbox"
@@ -91,13 +89,13 @@ export const Login = ({ setIsAuthenticated }) => {
           </label>
           <Link
             to="/forgot-password"
-            className="text-lg sm:text-base text-blue-400 hover:underline"
+            className="text-lg text-blue-400 sm:text-base hover:underline"
           >
             Forgot Password?
           </Link>
         </div>
 
-        <button className="w-full p-3 text-lg font-semibold text-white bg-blue-600 rounded-lg hover:bg-blue-500 transition-all duration-300 md:text-base sm:text-sm">
+        <button className="w-full p-3 text-lg font-semibold text-white transition-all duration-300 bg-blue-600 rounded-lg hover:bg-blue-500 md:text-base sm:text-sm">
           Login
         </button>
       </form>

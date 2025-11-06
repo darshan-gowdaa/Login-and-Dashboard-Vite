@@ -1,8 +1,14 @@
 import React, { useState } from "react";
-import { LineChart as RechartsLineChart, Line, XAxis, YAxis, Tooltip } from "recharts";
+import {
+  LineChart as RechartsLineChart,
+  Line,
+  XAxis,
+  YAxis,
+  Tooltip,
+  ResponsiveContainer,
+} from "recharts";
 
 const LineChart = () => {
-
   const dataSets = {
     Monthly: [
       { name: "Sep", premium: 95, trial: 75 },
@@ -39,7 +45,7 @@ const LineChart = () => {
   };
 
   return (
-    <div className="p-4 bg-gray-800 rounded-lg">
+    <div className="p-4 bg-gray-800 rounded-lg w-full">
       <div className="flex items-center justify-between mb-4">
         <h2 className="text-lg text-white">Companies</h2>
         <select
@@ -53,18 +59,18 @@ const LineChart = () => {
           <option value="Yearly">Yearly</option>
         </select>
       </div>
-      <RechartsLineChart
-        data={data}
-        width={500}
-        height={300}
-        margin={{ top: 5, right: 30, left: 20, bottom: 5 }}
-      >
-        <XAxis dataKey="name" stroke="#fff" />
-        <YAxis stroke="#fff" />
-        <Tooltip />
-        <Line type="monotone" dataKey="premium" stroke="#8884d8" />
-        <Line type="monotone" dataKey="trial" stroke="#82ca9d" />
-      </RechartsLineChart>
+      <ResponsiveContainer width="100%" height={300}>
+        <RechartsLineChart
+          data={data}
+          margin={{ top: 5, right: 30, left: 20, bottom: 5 }}
+        >
+          <XAxis dataKey="name" stroke="#fff" />
+          <YAxis stroke="#fff" />
+          <Tooltip />
+          <Line type="monotone" dataKey="premium" stroke="#8884d8" />
+          <Line type="monotone" dataKey="trial" stroke="#82ca9d" />
+        </RechartsLineChart>
+      </ResponsiveContainer>
     </div>
   );
 };

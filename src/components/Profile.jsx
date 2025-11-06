@@ -1,14 +1,25 @@
 import React from "react";
-import { User } from "lucide-react";
+import { User, ArrowLeft } from "lucide-react";
+import { useNavigate } from "react-router-dom";
 
 const Profile = () => {
+  const navigate = useNavigate();
   return (
     <div className="min-h-screen p-4 md:p-8 bg-white dark:bg-gray-900 animate-fade-in">
       <div className="mx-auto max-w-5xl">
         <div className="flex items-center justify-between mb-6">
-          <h1 className="text-2xl font-bold text-black dark:text-white">
-            Account
-          </h1>
+          <div className="flex items-center gap-3">
+            <button
+              onClick={() => navigate(-1)}
+              className="p-2 rounded-md bg-gray-100 dark:bg-gray-800 hover:bg-gray-200"
+              aria-label="Go back"
+            >
+              <ArrowLeft className="w-5 h-5 text-gray-700 dark:text-gray-200" />
+            </button>
+            <h1 className="text-2xl font-bold text-black dark:text-white">
+              Account
+            </h1>
+          </div>
         </div>
 
         <div className="p-4 md:p-6 bg-white rounded-lg dark:bg-gray-800 animate-slide-up">
